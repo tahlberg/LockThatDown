@@ -1,6 +1,5 @@
 package lockThatDown;
 
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -26,30 +25,8 @@ import javax.swing.SwingConstants;
 public class LockThatDownGui extends LockThatDownImplementation
 {
 
-	private JFrame frame;
+	JFrame frame;
 	private JTextField textField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) 
-	{
-		EventQueue.invokeLater(new Runnable() 
-		{
-			public void run() 
-			{
-				try 
-				{
-					LockThatDownGui window = new LockThatDownGui();
-					window.frame.setVisible(true);
-				} 
-				catch (Exception e) 
-				{
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
@@ -74,7 +51,6 @@ public class LockThatDownGui extends LockThatDownImplementation
 		
 		String[] comboOptions = {"kw1", "kw4"};
 		String[] pinOptions = {"4", "5"};
-		
 		
 		JComboBox comboBox = new JComboBox(comboOptions);
 		comboBox.setFont(new Font("8-bit pusab", Font.PLAIN, 14));
@@ -165,10 +141,7 @@ public class LockThatDownGui extends LockThatDownImplementation
 		teamLabel.setFont(new Font("8-bit pusab", Font.PLAIN, 11));
 		teamLabel.setBounds(358, 184, 197, 340);
 		frame.getContentPane().add(teamLabel);
-		
-		//ImageIcon bg = new ImageIcon("/images/keybg.jpg");
-		//bgLabel.setIcon(bg);
-		
+
 		generateButton.addActionListener(new ActionListener() 
 		{
             public void actionPerformed(ActionEvent e) 
