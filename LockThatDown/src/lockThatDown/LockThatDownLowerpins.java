@@ -38,7 +38,7 @@ public class LockThatDownLowerpins {
 		
 		//Create the LowerPin combinations
 		for(int i = 0; i < LowerPinnumCombos; i++) {
-			tempArr = randomGen(LowerPinnumBiting);
+			tempArr = LowerPinrandomGen(LowerPinnumBiting);
 			
 			//Test for duplicates
 			for(int n = 0; n < LowerPinnumCombos; n++) {

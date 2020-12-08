@@ -5,11 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.JWindow;
 import javax.swing.ListModel;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringJoiner;
@@ -39,7 +42,8 @@ public class LockThatDownGui extends LockThatDownImplementation
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.getContentPane().setForeground(Color.BLACK);
@@ -73,7 +77,7 @@ public class LockThatDownGui extends LockThatDownImplementation
 		JLabel warningLabel = new JLabel("Enter digits only please.");
 		warningLabel.setFont(new Font("8-bit pusab", Font.PLAIN, 8));
 		warningLabel.setForeground(Color.WHITE);
-		warningLabel.setBounds(149, 150, 237, 23);
+		warningLabel.setBounds(149, 150, 394, 23);
 		frame.getContentPane().add(warningLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Enter the number of locks for this keyset");
@@ -95,6 +99,7 @@ public class LockThatDownGui extends LockThatDownImplementation
 		
 		JButton generateButton = new JButton("Generate");
 		generateButton.setFont(new Font("8-bit pusab", Font.PLAIN, 11));
+		frame.getRootPane().setDefaultButton(generateButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 184, 340, 340);
@@ -153,10 +158,7 @@ public class LockThatDownGui extends LockThatDownImplementation
                     warningLabel.setText(" ");  //Sets error message label
                 }
                 else warningLabel.setText("That's not a number!"); //Displays error message
-                
-                String brandChoice = (String)comboBox.getSelectedItem();
-                //Do we have something to pass the brand choice into?
-                
+                 
                 String pinChoice = (String)pinBox.getSelectedItem();
                 Integer pinChoiceInt = 5;
                 if (pinChoice == "4") { pinChoiceInt = 4; }
@@ -170,15 +172,37 @@ public class LockThatDownGui extends LockThatDownImplementation
                 
                 else
                 {	
-	                int[][] listInts = comboGenerator(numberOfLocks, pinChoiceInt);
-	                
-	                String listString = "<html>" + Arrays.deepToString(listInts) + "<html>"; //String formatting
-	                listString = listString.replace("[", "");
-	                listString = listString.replace("]", "<br/>");
-	                listString = listString.replace(",", " ");
-	                
-	                System.out.println(listString);
-	                results.setText(listString);
+                	if (masterKeyRadioButton.isSelected())
+                	{
+                		int[][] listInts = comboGenerator(numberOfLocks, pinChoiceInt);
+                		int[][] masterInts = masterKey(listInts);
+                		
+                		String listString = "<html>" + Arrays.deepToString(masterInts) + "<html>"; //String formatting
+		                listString = listString.replace("[", "");
+		                listString = listString.replace("]", "<br/>");
+		                listString = listString.replace(",", " ");
+		                
+		                warningLabel.setText("Your Master Key is the first value");
+		                
+		                System.out.println(listString);
+		                results.setText(listString);
+                		
+                	}
+                		
+                	
+                	else
+                	{	
+                		
+		                int[][] listInts = comboGenerator(numberOfLocks, pinChoiceInt);
+		                
+		                String listString = "<html>" + Arrays.deepToString(listInts) + "<html>"; //String formatting
+		                listString = listString.replace("[", "");
+		                listString = listString.replace("]", "<br/>");
+		                listString = listString.replace(",", " ");
+		                
+		                System.out.println(listString);
+		                results.setText(listString);
+                	}
                 }
             }
         });
